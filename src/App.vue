@@ -1,7 +1,3 @@
-<script setup lang="ts"></script>
-
 <template>
-  <h1 class="bg-amber-300 text-4xl">Hola mundo</h1>
+  <RouterView/>
 </template>
-
-<style scoped></style>
