@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import HomeNavbar from '../components/home-navbar.vue';
-
+import HomeNavbar from '../components/home-navbar.vue'
 </script>
 
 <template>
-  <HomeNavbar/>
-  <section class="container">
+  <HomeNavbar />
+  <main class="container mx-auto py-6">
     <RouterView/>
-  </section>
+  </main>
 </template>
