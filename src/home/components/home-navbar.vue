@@ -23,7 +23,7 @@
         <button class="btn btn-ghost text-xl">Reviews</button>
       </div>
       <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
+        <ul v-if="categories.length > 5" class="menu menu-horizontal px-1">
           <li>
             <details>
               <summary>Categorias</summary>
@@ -34,6 +34,9 @@
               </ul>
             </details>
           </li>
+        </ul>
+        <ul v-else class="menu menu-horizontal px-1">
+          <li v-for="category of categories" :key="category.id"><a>{{ category.name }}</a></li>
         </ul>
       </div>
       <div class="navbar-end">

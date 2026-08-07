@@ -7,7 +7,7 @@
       />
     </figure>
     <div class="card-body">
-      <h2 class="card-title ">{{ review.name }}</h2>
+      <h2 class="card-title">{{ review.name }}</h2>
       <RatingStars :rating="review.rating" />
       <p>
         {{ review.description }}
