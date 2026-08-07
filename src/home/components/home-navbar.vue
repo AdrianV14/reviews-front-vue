@@ -20,7 +20,7 @@
             />
           </svg>
         </label>
-        <button class="btn btn-ghost text-xl">Reviews</button>
+        <RouterLink to="/" class="btn btn-ghost text-xl">Reviews</RouterLink>
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul v-if="categories.length > 5" class="menu menu-horizontal px-1">
@@ -36,7 +36,11 @@
           </li>
         </ul>
         <ul v-else class="menu menu-horizontal px-1">
-          <li v-for="category of categories" :key="category.id"><a>{{ category.name }}</a></li>
+          <li v-for="category of categories" :key="category.id">
+            <RouterLink :to="{ name: 'category-page', params: { id: category.id } }">{{
+              category.name
+            }}</RouterLink>
+          </li>
         </ul>
       </div>
       <div class="navbar-end">

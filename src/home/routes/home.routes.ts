@@ -5,10 +5,12 @@ export const homeRoutes = [
     children: [
       {
         path: '',
+        name:'home-page',
         component: () => import('../pages/home-page.vue'),
       },
       {
-        path: 'category/:id',
+        path: '/category/:id',
+        name:'category-page',
         component: () => import('../pages/category-page.vue'),
       },
     ],

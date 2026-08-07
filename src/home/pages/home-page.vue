@@ -1,7 +1,7 @@
 <template>
   <h1 class="text-3xl font-bold">Todas las reseñas</h1>
   <div
-    v-if="reviews"
+    v-if="reviews.length > 0"
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 gap-5"
   >
     <ReviewCard v-for="review in reviews" :key="review.id" :review="review" />
