@@ -5,7 +5,7 @@
   <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
     <div class="flex flex-col gap-2">
       <h2 class="text-2xl font-bold h-12">Datos de la reseña</h2>
-
+      <label for="name" class="label text-gray-300">Nombre:</label>
       <input
         v-model="form.name"
         placeholder="Nombre del establecimiento."
@@ -15,6 +15,7 @@
         class="input input-bordered w-full"
         required
       />
+      <label for="rating" class="label text-gray-300">Rating:</label>
       <input
         v-model="form.rating"
         placeholder="Calificación del establecimiento."
@@ -26,7 +27,7 @@
         class="input input-bordered w-full"
         required
       />
-
+      <label for="description" class="label text-gray-300">Descripción:</label>
       <textarea
         v-model="form.description"
         name="description"
@@ -37,6 +38,7 @@
         required
       ></textarea>
 
+      <label for="address" class="label text-gray-300">Dirección: </label>
       <input
         v-model="form.address"
         placeholder="Dirección del establecimiento."
@@ -46,6 +48,8 @@
         class="input input-bordered w-full"
         required
       />
+
+      <label for="latitud" class="label text-gray-300">Latitud:</label>
       <input
         v-model="form.latitude"
         placeholder="Latitud del establecimiento."
@@ -55,6 +59,7 @@
         class="input input-bordered w-full"
         required
       />
+      <label for="longitud" class="label text-gray-300">Longitud:</label>
       <input
         v-model="form.longitude"
         placeholder="Longitud del establecimiento."
@@ -64,7 +69,7 @@
         class="input input-bordered w-full"
         required
       />
-
+      <label for="categoryId" class="label text-gray-300">Categoria:</label>
       <select
         name="categoryId"
         id="categoryId"
@@ -90,7 +95,7 @@
       />
 
       <div v-if="imagePreview">
-        <img :src="imagePreview" alt="Temporal image" class="w-lg object-contain" />
+        <img :src="imagePreview" alt="Temporal image" class="w-full max-h-100 object-contain  " />
       </div>
     </div>
   </form>
