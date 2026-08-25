@@ -8,8 +8,12 @@ const getReviews = async (): Promise<Review[]> => {
 
 const getReviewsByCategory = async (id: string): Promise<Review[]> => {
   const response = await api.get(`/reviews/category/${id}`)
-  console.log(response.data.data)
   return response.data.data
 }
 
-export { getReviews, getReviewsByCategory }
+const getReviewById = async (id: string): Promise<Review> => {
+  const response = await api.get(`/reviews/${id}`)
+  return response.data.data
+}
+
+export { getReviews, getReviewsByCategory, getReviewById}

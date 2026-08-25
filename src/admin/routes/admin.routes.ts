@@ -11,7 +11,7 @@ export const adminRoutes = [
       {
         path: 'admin/reviews/:id',
         name: 'admin-review-page',
-        component: () => import('../pages/reviews-admin-page.vue'),
+        component: () => import('../pages/review-admin-page.vue'),
       },
       {
         path: 'admin/categories',
