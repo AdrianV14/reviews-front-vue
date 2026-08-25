@@ -1,9 +1,148 @@
 <template>
-  <div>
-    ejemplo
-  </div>
+  <h1 class="text-2xl font-bold">{{ form.name }}</h1>
+  <div class="divider"></div>
+
+  <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div class="flex flex-col gap-2">
+      <h2 class="text-2xl font-bold h-12">Datos de la reseña</h2>
+
+      <input
+        v-model="form.name"
+        placeholder="Nombre del establecimiento."
+        type="text"
+        name="name"
+        id="name"
+        class="input input-bordered w-full"
+        required
+      />
+      <input
+        v-model="form.rating"
+        placeholder="Calificación del establecimiento."
+        type="number"
+        min="1"
+        max="5"
+        name="rating"
+        id="rating"
+        class="input input-bordered w-full"
+        required
+      />
+
+      <textarea
+        v-model="form.description"
+        name="description"
+        id="description"
+        placeholder="Descripción del establecimiento"
+        rows="6"
+        class="textarea textarea-bordered w-full"
+        required
+      ></textarea>
+
+      <input
+        v-model="form.address"
+        placeholder="Dirección del establecimiento."
+        type="text"
+        name="address"
+        id="address"
+        class="input input-bordered w-full"
+        required
+      />
+      <input
+        v-model="form.latitude"
+        placeholder="Latitud del establecimiento."
+        type="number"
+        name="latitud"
+        id="latitud"
+        class="input input-bordered w-full"
+        required
+      />
+      <input
+        v-model="form.longitude"
+        placeholder="Longitud del establecimiento."
+        type="number"
+        name="longitud"
+        id="longitud"
+        class="input input-bordered w-full"
+        required
+      />
+
+      <select
+        name="categoryId"
+        id="categoryId"
+        class="select select-bordered w-full"
+        v-model="form.categoryId"
+      >
+        <option value="" disabled>Selecciona una categoría</option>
+        <option v-for="category in categories" :key="category.id" :value="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <div class="flex flex-col gap-2">
+      <div class="flex justify-end h-8">
+        <button class="btn btn-secondary" type="submit">Guardar</button>
+      </div>
+
+      <input
+        type="file"
+        accept="image/*"
+        @change="handleImage($event)"
+        class="file-input file-input-bordered w-full mt-4"
+      />
+
+      <div v-if="imagePreview">
+        <img :src="imagePreview" alt="Temporal image" class="w-lg object-contain" />
+      </div>
+    </div>
+  </form>
 </template>
 
 <script setup lang="ts">
+import type { Category } from '@/categories/interfaces/category-interface'
+import { getCategories } from '@/categories/services/category'
+import { getReviewById } from '@/reviews/services/review'
+import { onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router'
 
+const imagePreview = ref<string | null>(null)
+const form = ref({
+  name: '',
+  rating: 0,
+  description: '',
+  address: '',
+  latitude: 0,
+  longitude: 0,
+  coverImage: '',
+  categoryId: '',
+})
+const categories = ref<Category[]>([])
+const route = useRoute()
+const idParam = route.params.id as string
+
+onMounted(async () => {
+  categories.value = await getCategories()
+
+  if (idParam === 'new') return
+
+
+  const review = await getReviewById(idParam)
+
+  form.value = {
+    name: review.name || '',
+    rating: review.rating || 1,
+    description: review.description || '',
+    address: review.address || '',
+    latitude: review.latitude || 0,
+    longitude: review.longitude || 0,
+    coverImage: review.coverImage,
+    categoryId: review.categoryId,
+  }
+})
+
+const handleImage = (event: Event) => {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+
+  if (!file) return
+  imagePreview.value = URL.createObjectURL(file)
+}
 </script>

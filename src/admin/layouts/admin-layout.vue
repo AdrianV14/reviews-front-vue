@@ -25,7 +25,7 @@
             <path d="M14 10l2 2l-2 2"></path>
           </svg>
         </label>
-        <div class="px-4">Navbar Title</div>
+        <div class="px-4">Admin Dashboard</div>
       </nav>
       <div class="p-4">
         <RouterView />

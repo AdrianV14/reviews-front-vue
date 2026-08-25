@@ -4,7 +4,6 @@
       <!-- head -->
       <thead>
         <tr>
-
           <th>Titulo</th>
           <th>Calificacion</th>
           <th>Categoria</th>
