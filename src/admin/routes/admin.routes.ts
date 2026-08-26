@@ -18,6 +18,11 @@ export const adminRoutes = [
         name: 'admin-categories-page',
         component: () => import('../pages/categories-admin-page.vue'),
       },
+      {
+        path: 'admin/categories/:id',
+        name: 'admin-category-page',
+        component: () => import('../pages/category-admin-page.vue'),
+      },
     ],
   },
 ]

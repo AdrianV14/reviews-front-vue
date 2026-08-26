@@ -38,7 +38,8 @@
       >
         <ul class="menu w-full grow">
           <li>
-            <button
+            <RouterLink
+            :to="{name:'home-page'}"
               class="is-drawer-close:tooltip is-drawer-close:tooltip-right"
               data-tip="Homepage"
             >
@@ -58,10 +59,11 @@
                 ></path>
               </svg>
               <span class="is-drawer-close:hidden">Homepage</span>
-            </button>
+            </RouterLink>
           </li>
           <li>
-            <button
+            <RouterLink
+              :to="{name:'admin-reviews-page'}"
               class="is-drawer-close:tooltip is-drawer-close:tooltip-right"
               data-tip="Reviews"
             >
@@ -76,10 +78,11 @@
                 />
               </svg>
               <span class="is-drawer-close:hidden">Reviews</span>
-            </button>
+            </RouterLink>
           </li>
           <li>
-            <button
+            <RouterLink
+              :to="{name:'admin-categories-page'}"
               class="is-drawer-close:tooltip is-drawer-close:tooltip-right"
               data-tip="Categories"
             >
@@ -99,7 +102,7 @@
                 <circle cx="7.5" cy="7.5" r=".5" fill="currentColor" />
               </svg>
               <span class="is-drawer-close:hidden">Categories</span>
-            </button>
+            </RouterLink>
           </li>
         </ul>
       </div>

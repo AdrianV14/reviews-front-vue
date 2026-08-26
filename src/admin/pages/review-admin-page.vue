@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-2xl font-bold">{{ form.name }}</h1>
+  <h1 v-if="idParam !== 'new'" class="text-2xl font-bold">{{ form.name }}</h1>
   <div class="divider"></div>
 
   <form class="grid grid-cols-1 sm:grid-cols-2 gap-4">

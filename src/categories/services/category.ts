@@ -6,4 +6,21 @@ const getCategories = async (): Promise<Category[]> => {
   return response.data.data
 }
 
-export { getCategories }
+const getCategory = async (id: string): Promise<Category> => {
+  const response = await api.get(`/categories/${id}`)
+  return response.data.data
+}
+
+const createCategory = async (name: string): Promise<Category> => {
+  const response = await api.post('/categories', {
+    name: name,
+  })
+  return response.data
+}
+
+const deleteCategory = async (id: string): Promise<string> => {
+  const response = await api.delete(`/categories/${id}`)
+  return response.data.data
+}
+
+export { getCategories, getCategory, createCategory, deleteCategory }
