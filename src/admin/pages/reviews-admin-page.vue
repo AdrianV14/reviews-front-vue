@@ -8,7 +8,7 @@
   <div class="flex gap-2 items-center h-20">
     <div class="flex-1"></div>
     <RouterLink class="btn btn-secondary" :to="{ name: 'admin-review-page', params: { id: 'new' } }"
-      >Nuevo producto</RouterLink
+      >Nueva Reseña</RouterLink
     >
   </div>
   <ReviewTable :reviews="reviews" />
