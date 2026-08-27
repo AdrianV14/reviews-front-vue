@@ -11,7 +11,7 @@
       >Nueva Reseña</RouterLink
     >
   </div>
-  <ReviewTable :reviews="reviews" />
+  <ReviewTable :reviews="reviews" @review-delete="loadReviews" />
 </template>
 
 <script setup lang="ts">
@@ -23,6 +23,11 @@ import { onMounted, ref } from 'vue'
 const reviews = ref<Review[]>([])
 
 onMounted(async () => {
-  reviews.value = await getReviews()
+  loadReviews()
 })
+
+
+const loadReviews = async () => {
+  reviews.value = await getReviews()
+}
 </script>

@@ -27,7 +27,7 @@ const updateCategory = async (id:string, name: string): Promise<Category> => {
 
 const deleteCategory = async (id: string): Promise<string> => {
   const response = await api.delete(`/categories/${id}`)
-  return response.data.data
+  return response.data.message
 }
 
 export { getCategories, getCategory, createCategory, deleteCategory, updateCategory }

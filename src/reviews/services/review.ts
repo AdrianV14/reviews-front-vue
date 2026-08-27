@@ -16,4 +16,19 @@ const getReviewById = async (id: string): Promise<Review> => {
   return response.data.data
 }
 
-export { getReviews, getReviewsByCategory, getReviewById}
+const createReview = async (data: FormData): Promise<Review> => {
+  const response = await api.post<Review>('/reviews', data)
+  return response.data
+}
+
+const updateReview = async (id: string, data: FormData): Promise<Review> => {
+  const response = await api.post<Review>(`/reviews/${data}`, data)
+  return response.data
+}
+
+const deleteReview = async (id: string): Promise<string> => {
+  const response = await api.delete(`/reviews/${id}`)
+  return response.data.message
+}
+
+export { getReviews, getReviewsByCategory, getReviewById, createReview, updateReview, deleteReview }
