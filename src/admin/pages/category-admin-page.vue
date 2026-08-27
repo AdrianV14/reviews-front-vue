@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="idParam !== 'new'" class="text-2xl font-bold">{{ form.name }}</h1>
+  <h1 v-if="idParam !== 'new'" class="text-2xl font-bold">{{ title}}</h1>
   <div class="divider"></div>
 
   <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" @submit.prevent="handleSubmit()">
@@ -23,21 +23,22 @@
 </template>
 
 <script setup lang="ts">
-import { createCategory, getCategory } from '@/categories/services/category'
+import { createCategory, getCategory, updateCategory } from '@/categories/services/category'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const router = useRouter()
 const route = useRoute()
 const idParam = route.params.id as string
+const title = ref('');
 const form = ref({
   name: '',
 })
 
 onMounted(async () => {
   if (idParam === 'new') return
-
   const category = await getCategory(idParam)
+  title.value = category.name
 
   form.value = {
     name: category.name,
@@ -46,14 +47,17 @@ onMounted(async () => {
 
 const handleSubmit = async () => {
   if (form.value.name === '') return
-
+  let response;
   if (idParam === 'new') {
     //Create
-    await createCategory(form.value.name)
+    response = await createCategory(form.value.name)
   } else {
     //Update
+    response = await updateCategory( idParam ,form.value.name)
   }
 
+  //Toast pendiente
+  console.log(response);
   router.push({ name: 'admin-categories-page' })
 }
 </script>
