@@ -62,6 +62,7 @@ const handleDelete = async (id: string) => {
 
   try {
     const response = await deleteCategory(id)
+    //Toast
     console.log(response)
     emit('categoryDeleted')
   } catch {
