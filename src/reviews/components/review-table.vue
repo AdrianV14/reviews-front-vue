@@ -37,12 +37,20 @@
           <td>
             {{ review.categoryId }}
           </td>
-          <th>
+          <th class="flex justify-end">
             <RouterLink
               :to="{ name: 'admin-review-page', params: { id: review.id } }"
               class="btn btn-md btn-ghost text-accent"
               >Detalles
             </RouterLink>
+
+            <button
+              @click="handleDelete(review.id)"
+              type="button"
+              class="btn btn-md btn-ghost text-primary"
+            >
+              Eliminar
+            </button>
           </th>
         </tr>
       </tbody>
@@ -52,8 +60,29 @@
 
 <script setup lang="ts">
 import type { Review } from '../interfaces/review-interface'
-
+import { useToast } from 'vue-toastification'
+import { deleteReview } from '../services/review'
 defineProps<{
   reviews: Review[]
 }>()
+
+const emit = defineEmits<{
+  reviewDelete: []
+}>()
+
+const toast = useToast()
+
+const handleDelete = async (id: string) => {
+  const confirmed = confirm('¿Estás seguro de que deseas eliminar esta reseña?')
+  if (!confirmed) return
+
+  try {
+    const response = await deleteReview(id)
+    console.log(response)
+    toast.success(response)
+    emit('reviewDelete')
+  } catch {
+    toast.error('Error al eliminar la reseña')
+  }
+}
 </script>

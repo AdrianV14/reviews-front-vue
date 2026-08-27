@@ -1,5 +1,5 @@
 <template>
-  <h1 v-if="idParam !== 'new'" class="text-2xl font-bold">{{ title}}</h1>
+  <h1 v-if="idParam !== 'new'" class="text-2xl font-bold">{{ title }}</h1>
   <div class="divider"></div>
 
   <form class="grid grid-cols-1 sm:grid-cols-2 gap-4" @submit.prevent="handleSubmit()">
@@ -26,11 +26,12 @@
 import { createCategory, getCategory, updateCategory } from '@/categories/services/category'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
+import { useToast } from 'vue-toastification'
+const toast = useToast()
 const router = useRouter()
 const route = useRoute()
 const idParam = route.params.id as string
-const title = ref('');
+const title = ref('')
 const form = ref({
   name: '',
 })
@@ -47,17 +48,21 @@ onMounted(async () => {
 
 const handleSubmit = async () => {
   if (form.value.name === '') return
-  let response;
-  if (idParam === 'new') {
-    //Create
-    response = await createCategory(form.value.name)
-  } else {
-    //Update
-    response = await updateCategory( idParam ,form.value.name)
-  }
 
-  //Toast pendiente
-  console.log(response);
-  router.push({ name: 'admin-categories-page' })
+  try {
+    if (idParam === 'new') {
+      //Create
+      await createCategory(form.value.name)
+    } else {
+      //Update
+      await updateCategory(idParam, form.value.name)
+    }
+    toast.success(
+      idParam === 'new' ? 'Categoría creada correctamente' : 'Categoría actualizada correctamente',
+    )
+    router.push({ name: 'admin-categories-page' })
+  } catch {
+    toast.error('Error de servidor. Intenta de nuevo.')
+  }
 }
 </script>

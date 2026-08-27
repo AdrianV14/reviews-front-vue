@@ -45,15 +45,17 @@
 </template>
 
 <script setup lang="ts">
+import { useToast } from 'vue-toastification';
 import type { Category } from '../interfaces/category-interface'
 import { deleteCategory } from '../services/category'
 defineProps<{
   categories: Category[]
 }>()
-
 const emit = defineEmits<{
   categoryDeleted: []
 }>()
+
+const toast = useToast();
 
 const handleDelete = async (id: string) => {
   const confirmed = confirm('¿Estás seguro de que deseas eliminar esta categoría?')
@@ -62,11 +64,10 @@ const handleDelete = async (id: string) => {
 
   try {
     const response = await deleteCategory(id)
-    //Toast
-    console.log(response)
+    toast.success(response)
     emit('categoryDeleted')
-  } catch {
-    console.log('error')
+  } catch{
+    toast.error('Error al eliminar la categoría. ');
   }
 }
 </script>
