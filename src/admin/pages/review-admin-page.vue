@@ -175,17 +175,20 @@ const handleSubmit = async () => {
 
   try {
     if (idParam === 'new') {
-      //create
+      if (!image.value) {
+        toast.error('La imagen es necesaria para crear una reseña.')
+        return
+      }
       await createReview(formData)
     } else {
-      //Update - manejar si cambio imagen o no
       await updateReview(idParam, formData)
     }
     toast.success(
       idParam === 'new' ? 'Reseña creada correctamente' : 'Reseña actualizada correctamente',
     )
     router.push({ name: 'admin-reviews-page' })
-  } catch {
+  } catch (e){
+    console.log(e);
     toast.error('Error de servidor. Intenta de nuevo.')
   }
 }
