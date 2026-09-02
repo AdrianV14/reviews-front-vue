@@ -18,7 +18,7 @@
             <div class="flex items-center gap-3">
               <div class="avatar">
                 <div class="mask mask-squircle h-12 w-12">
-                  <!-- <img [src]="product.images | productImage" [alt]="product.title" /> -->
+                  <img :src="review.coverImage" :alt="review.name" />
                 </div>
               </div>
               <div>

@@ -22,7 +22,7 @@ const createReview = async (data: FormData): Promise<Review> => {
 }
 
 const updateReview = async (id: string, data: FormData): Promise<Review> => {
-  const response = await api.post<Review>(`/reviews/${data}`, data)
+  const response = await api.put<Review>(`/reviews/${id}`, data)
   return response.data
 }
 
